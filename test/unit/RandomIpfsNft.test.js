@@ -155,5 +155,23 @@ const { developmentChains } = require("../../helper-hardhat-config");
                 }
             });
         });
+        describe("fulfillRandomWords", function () {
+            it("mints NFT after random number is returned", async function () {
+                try {
+                    const fee = await randomIpfs.getMintFee();
+                    const requestNftResponse = await randomIpfs.requestNft({
+                        value: fee.toString(),
+                    });
+                    const requestNftReceipt = await requestNftResponse.wait(1);
+                    await vrfCoordinator.fulfillRandomWords(
+                        requestNftReceipt.events[1].args.requestId,
+                        randomIpfs.address
+                    );
+                } catch (e) {
+                    console.log(e);
+                    reject(e);
+                }
+            });
+        });
     }
 );
