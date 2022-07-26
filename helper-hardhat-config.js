@@ -18,7 +18,7 @@ const NETWORK_CONFIG = {
         vrfCoordinatorV2Address: "",
         keyHash:
             "0xd89b2bf150e3b9e13446986e571fb9cab24b13cea0a43ea20a6049a85cc807cc",
-        callbackGasLimit: "50000",
+        callbackGasLimit: "1073741824",
         mintFee: MINT_FEE,
     },
     4: {

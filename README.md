@@ -11,3 +11,4 @@ GAS_REPORT=true npx hardhat test
 npx hardhat node
 npx hardhat run scripts/deploy.js
 ```
+I've deployed RandomIpfsNft with wrong ```i_callbackGasLimit``` by mistake (this value is less than gas requirements of ```fullfillRandomWords```). More carefull when deploying smart contracts next time. 

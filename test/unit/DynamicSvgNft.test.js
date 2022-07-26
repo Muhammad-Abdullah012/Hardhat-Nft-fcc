@@ -25,7 +25,7 @@ const readFile = (path) => {
     function () {
         let deployer, v3AggregatorMock, DynamicSvgNft;
         beforeEach(async function () {
-            await deployments.fixture("all");
+            await deployments.fixture(["main", "mocks"]);
             deployer = (await getNamedAccounts()).deployer;
             v3AggregatorMock = await ethers.getContract(V3AGGREGATOR_MOCK);
             DynamicSvgNft = await ethers.getContract(DYNAMIC_SVG_NFT);

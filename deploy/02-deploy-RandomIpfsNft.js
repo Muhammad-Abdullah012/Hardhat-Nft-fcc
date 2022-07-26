@@ -45,7 +45,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     let wait;
     let vrfCoordinatorV2Address, subscriptionId;
     if (developmentChains.includes(network.name)) {
-        const amount = "100";
+        const amount = ethers.utils.parseEther("100");
         const vrfCoordinatorV2Mock = await ethers.getContract(
             VRFCOORDINATORV2_MOCK
         );
@@ -60,7 +60,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
             amount
         );
         await txFund.wait(1);
-        console.log(
+        console.log( "Subscription is : ",
             (
                 await vrfCoordinatorV2Mock.getSubscription(subscriptionId)
             ).toString()

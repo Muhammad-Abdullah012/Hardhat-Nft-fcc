@@ -12,7 +12,7 @@ const { developmentChains } = require("../../helper-hardhat-config");
         let randomIpfs, deployer, vrfCoordinator;
         let MINT_FEE;
         beforeEach(async function () {
-            await deployments.fixture("all");
+            await deployments.fixture(["main", "mocks"]);
             randomIpfs = await ethers.getContract(RANDOM_IPFS_NFT);
             vrfCoordinator = await ethers.getContract(VRFCOORDINATORV2_MOCK);
             deployer = (await ethers.getSigners())[0];

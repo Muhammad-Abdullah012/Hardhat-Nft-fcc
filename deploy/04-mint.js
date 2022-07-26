@@ -4,6 +4,7 @@ const {
     RANDOM_IPFS_NFT,
     DYNAMIC_SVG_NFT,
     VRFCOORDINATORV2_MOCK,
+    RANDOM_WORDS_REQUESTED,
 } = require("../constants/constants");
 
 module.exports = async ({ getNamedAccounts }) => {
@@ -29,9 +30,12 @@ module.exports = async ({ getNamedAccounts }) => {
     );
 
     await new Promise(async (resolve) => {
-        setTimeout(resolve, 300000);
-        randomIpfs.once("NftMinted", () => {
-            console.log("Nft is minted!");
+        randomIpfs.once("NftMinted", async () => {
+            console.log(
+                `Random IPFS NFT index 0 tokenURI: ${await randomIpfs.tokenURI(
+                    0
+                )}`
+            );
             resolve();
         });
         if (chainId == 31337) {
@@ -41,15 +45,15 @@ module.exports = async ({ getNamedAccounts }) => {
                 VRFCOORDINATORV2_MOCK,
                 deployer
             );
-            await vrfCoordinatorV2Mock.fulfillRandomWords(
-                requestId,
-                randomIpfs.address
-            );
+
+            vrfCoordinatorV2Mock.once(RANDOM_WORDS_REQUESTED, async () => {
+                await vrfCoordinatorV2Mock.fulfillRandomWords(
+                    requestId,
+                    randomIpfs.address
+                );
+            });
         }
     });
-    console.log(
-        `Random IPFS NFT index 0 tokenURI: ${await randomIpfs.tokenURI(0)}`
-    );
 };
 
 module.exports.tags = ["all", "mint"];
