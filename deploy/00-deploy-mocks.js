@@ -6,7 +6,7 @@ const {
 const { developmentChains } = require("../helper-hardhat-config");
 
 /** @dev Per request cost is 0.25 Link / Oracle gas*/
-const BASE_FEE = ethers.utils.parseEther("0.25");
+const BASE_FEE = ethers.utils.parseEther("0.25").toString();
 
 /**
  * @dev This is calculated value, based on gas price of the chain.
@@ -15,7 +15,7 @@ const BASE_FEE = ethers.utils.parseEther("0.25");
  */
 const GAS_PRICE_LINK = 1e9;
 const DECIMALS = "18";
-const INITIAL_PRICE = "200000000000000000000"; // = 200 ETH
+const INITIAL_PRICE = ethers.utils.parseEther("200").toString(); // = 200 ETH
 
 module.exports = async ({ getNamedAccounts, deployments }) => {
     const { deploy, log } = deployments;
