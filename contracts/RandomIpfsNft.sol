@@ -21,6 +21,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 error RandomIpfsNft__RangeOutOfBounds();
 error RandomIpfsNft__NotEnoughETH();
 error RandomIpfsNft__TransferFailed();
+error RandomIpfsNft__InvalidRequestId();
 
 contract RandomIpfsNft is VRFConsumerBaseV2, ERC721URIStorage, Ownable {
     // address private immutable i_owner;
@@ -92,7 +93,9 @@ contract RandomIpfsNft is VRFConsumerBaseV2, ERC721URIStorage, Ownable {
         override
     {
         address dogOwner = s_requestToSender[requestId];
-        require(dogOwner != address(0), "Invalid Request Id");
+        if (dogOwner == address(0)) {
+            revert RandomIpfsNft__InvalidRequestId();
+        }
         uint256 newTokenId = s_TokenCounter;
 
         s_TokenCounter = newTokenId + 1;
