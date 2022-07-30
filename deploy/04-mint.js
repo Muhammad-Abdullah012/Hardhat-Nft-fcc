@@ -6,28 +6,29 @@ const {
     VRFCOORDINATORV2_MOCK,
     RANDOM_WORDS_REQUESTED,
 } = require("../constants/constants");
+const { NETWORK_CONFIG } = require("../helper-hardhat-config");
 
 module.exports = async ({ getNamedAccounts }) => {
     const { deployer } = await getNamedAccounts();
     const chainId = network.config.chainId;
-    const basicNft = await ethers.getContract(BASIC_NFT, deployer);
+    // const basicNft = await ethers.getContract(BASIC_NFT, deployer);
     const randomIpfs = await ethers.getContract(RANDOM_IPFS_NFT, deployer);
-    const dynamicSvgNft = await ethers.getContract(DYNAMIC_SVG_NFT, deployer);
+    // const dynamicSvgNft = await ethers.getContract(DYNAMIC_SVG_NFT, deployer);
 
-    const basicMintTx = await basicNft.mintNft();
-    await basicMintTx.wait(1);
-    console.log(`Basic NFT index 0 tokenURI: ${await basicNft.tokenURI(0)}`);
+    // const basicMintTx = await basicNft.mintNft();
+    // await basicMintTx.wait(1);
+    // console.log(`Basic NFT index 0 tokenURI: ${await basicNft.tokenURI(0)}`);
 
     const mintFee = (await randomIpfs.getMintFee()).toString();
-    const randomIpfsTx = await randomIpfs.requestNft({ value: mintFee });
+    const randomIpfsTx = await randomIpfs.requestNft({ value: mintFee, gasLimit: "5000000" });
     const randomIpfsTxReceipt = await randomIpfsTx.wait(1);
 
-    const highValue = ethers.utils.parseEther("4000");
-    const dynamicSvgNftMintTx = await dynamicSvgNft.mintNft(highValue);
-    await dynamicSvgNftMintTx.wait(1);
-    console.log(
-        `Dynamic SVG NFT index 0 tokenURI: ${await dynamicSvgNft.tokenURI(0)}`
-    );
+    // const highValue = ethers.utils.parseEther("4000");
+    // const dynamicSvgNftMintTx = await dynamicSvgNft.mintNft(highValue);
+    // await dynamicSvgNftMintTx.wait(1);
+    // console.log(
+    //     `Dynamic SVG NFT index 0 tokenURI: ${await dynamicSvgNft.tokenURI(0)}`
+    // );
 
     await new Promise(async (resolve) => {
         randomIpfs.once("NftMinted", async () => {

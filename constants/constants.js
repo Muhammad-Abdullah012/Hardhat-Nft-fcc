@@ -1,7 +1,7 @@
 const VRFCOORDINATORV2_MOCK = "VRFCoordinatorV2Mock";
 const V3AGGREGATOR_MOCK = "MockV3Aggregator";
 const BASIC_NFT = "BasicNft";
-const RANDOM_IPFS_NFT = "RandomIpfsNft";
+const RANDOM_IPFS_NFT = "RandomIpfsNft2";
 const DYNAMIC_SVG_NFT = "DynamicSvgNft";
 const RANDOM_WORDS_REQUESTED = "RandomWordsRequested";
 

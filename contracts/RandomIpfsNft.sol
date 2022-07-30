@@ -23,7 +23,7 @@ error RandomIpfsNft__NotEnoughETH();
 error RandomIpfsNft__TransferFailed();
 error RandomIpfsNft__InvalidRequestId();
 
-contract RandomIpfsNft is VRFConsumerBaseV2, ERC721URIStorage, Ownable {
+contract RandomIpfsNft2 is VRFConsumerBaseV2, ERC721URIStorage, Ownable {
     // address private immutable i_owner;
 
     // VRF Chainlink variables
